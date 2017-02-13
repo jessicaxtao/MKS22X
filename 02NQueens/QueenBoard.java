@@ -28,14 +28,33 @@ public class QueenBoard{
      *@return the number of solutions found, or -1 if the board was never solved.
      *The board should be reset after this is run.    
      */
+    
     public int getSolutionCount(){
     	return -1;
     }
+    
     /**toString
      *and all nunbers that represent queens are replaced with 'Q' 
      *all others are displayed as underscores '_'
      */
     public String toString(){
-    	return "";
+	String ans = "";
+	for(int row = 0; row < board[0].length; row++) {
+	    for(int col = 0; col < board[row].length; col++) {
+		if(board[row][col] == 'Q') {
+		    ans += "Q";
+		}else{
+		    ans += "_";
+		}
+	    }
+	    ans += "\n";
+	}
+    	return ans;
+    }
+
+    public static void main(String[] args) {
+	Queenboard a = new Queenboard(4);
+	a.solve();
+	System.out.println(a);
     }
 }
