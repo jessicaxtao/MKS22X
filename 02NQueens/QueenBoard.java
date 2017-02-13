@@ -37,34 +37,49 @@ public class QueenBoard{
 	    }
 	    //how to go back?
 	}
+	return false;
     }
 
-    private boolean addQueen(int row, int col) {
+    private void addQueen(int row, int col) {
 	board[row][col] = -1;
-	for(int r = 0; r < board[0].length; r++) {
-	    board[r][col] += 1;
+	for(int r = row + 1; r < board[0].length; r++) {
+	    board[row][r] += 1;
 	}
-	for(int c = 0; c < board[0].length; c++) {
-	    board[row][c] += 1;
+	//r and c would have to be equal anyway
+	for(int r = row + 1; r < board[0].length; r++) {
+	    board[r][r] += 1;
 	}
-	//do the diagnals
+	for(int r = 1; r < board[0].length - row; r++) {
+	    board[row - r][col + r] += 1;
+	}
     }
 
-    private boolean removeQueen(int row, int col) {
-	board[row][col] == 0;
+    private void removeQueen(int row, int col) {
+	board[row][col] = 0;
 	for(int r = 0; r < board[0].length; r++) {
 	    board[r][col] -= 1;
 	}
 	for(int c = 0; c < board[0].length; c++) {
 	    board[row][c] -= 1;
 	}
-	
+	for(int r = 0; r < board[0].length - row; r++) {
+	    board[row + r][col + r] -= 1;
+	}
+	for(int r = 0; r < board[0].length - row; r++) {
+	    board[row + r][col - r] -= 1;
+	}
+	for(int r = 0; r < board[0].length - row; r++) {
+	    board[row - r][col + r] -= 1;
+	}
+	for(int r = 0; r < board[0].length - row; r++) {
+	    board[row - r][col - r] -= 1;
+	}
     }
     /**
      *@return the number of solutions found, or -1 if the board was never solved.
      *The board should be reset after this is run.    
      */
-    
+    //instead of return true just keep adding the number up and adding the queen adn removing the queen and just check that ur at the last column
     public int getSolutionCount(){
     	return -1;
     }
@@ -77,10 +92,14 @@ public class QueenBoard{
 	String ans = "";
 	for(int row = 0; row < board[0].length; row++) {
 	    for(int col = 0; col < board[row].length; col++) {
-		if(board[row][col] == 'Q') {
-		    ans += "Q";
-		}else{
-		    ans += "_";
+		if(board[row][col] == -1) {
+		    ans += "Q ";
+		}
+		else if(board[row][col] > 0) {
+		    ans += "" + board[row][col] + " ";
+		}
+		else{
+		    ans += "_ ";
 		}
 	    }
 	    ans += "\n";
@@ -89,8 +108,10 @@ public class QueenBoard{
     }
 
     public static void main(String[] args) {
-	Queenboard a = new Queenboard(4);
-	a.solve();
+	QueenBoard a = new QueenBoard(5);
+	//a.solve();
+	//System.out.println(a);
+	a.addQueen(2,2);
 	System.out.println(a);
     }
 }
