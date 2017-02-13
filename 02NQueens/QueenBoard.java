@@ -31,22 +31,33 @@ public class QueenBoard{
 	}else {
 	    for(int row = 0; row < board[0].length; row++) {
 		if(board[row][col] == 0) {
-		    
-		}
+		    addQueen(row, col);
+		    return solveH(col + 1);
+	        }	
 	    }
+	    //how to go back?
 	}
     }
 
     private boolean addQueen(int row, int col) {
 	board[row][col] = -1;
-	for (int i = 0; i < board[0].length; i++) {
-	    if(board[row][i] != -1) {
-		board[row][i] += 1;
-	    }
+	for(int r = 0; r < board[0].length; r++) {
+	    board[r][col] += 1;
 	}
+	for(int c = 0; c < board[0].length; c++) {
+	    board[row][c] += 1;
+	}
+	//do the diagnals
     }
 
     private boolean removeQueen(int row, int col) {
+	board[row][col] == 0;
+	for(int r = 0; r < board[0].length; r++) {
+	    board[r][col] -= 1;
+	}
+	for(int c = 0; c < board[0].length; c++) {
+	    board[row][c] -= 1;
+	}
 	
     }
     /**
