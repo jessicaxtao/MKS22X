@@ -1,17 +1,19 @@
 public class QueenBoard{
     private int[][]board;
-    private int solutionCount;
+    private int solutionCount = -1;
     
     public QueenBoard(int size){
 	board = new int[size][size];
-	for(int row = 0; row < size; row++) {
-	    for(int col = 0; col < size; col++) {
+	clear();
+    }
+
+    private void clear() {
+		for(int row = 0; row < board.length; row++) {
+	    for(int col = 0; col < board.length; col++) {
 		board[row][col] = 0;
 	    }
 	}
-	solutionCount = 0;
     }
-
     /**
      *precondition: board is filled with 0's only.
      *@return false when the board is not solveable. true otherwise.
@@ -74,8 +76,29 @@ public class QueenBoard{
      *The board should be reset after this is run.    
      */
     //instead of return true just keep adding the number up and adding the queen adn removing the queen and just check that ur at the last column
+
+    private void countH(int col){
+	if(col == board.length) {
+	    solutionCount++;
+	}else {
+	    for(int row = 0; row < board.length; row++) {
+		if(board[row][col] == 0) {
+		    addQueen(row, col);
+		    countH(col + 1);
+		    removeQueen(row, col);
+		}
+	    }
+	}
+    }
+    
+    public void countSolution() {
+	clear();
+	solutionCount = 0;
+	countH(0);
+    }
+    
     public int getSolutionCount(){
-    	return -1;
+        return solutionCount;
     }
     
     /**toString
@@ -101,11 +124,5 @@ public class QueenBoard{
 	    ans += "\n";
 	}
     	return ans;
-    }
-
-    public static void main(String[] args) {
-	QueenBoard a = new QueenBoard(4);
-	a.solve();
-	System.out.println(a);
     }
 }
