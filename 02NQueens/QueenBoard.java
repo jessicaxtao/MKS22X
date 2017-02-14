@@ -42,37 +42,27 @@ public class QueenBoard{
 
     private void addQueen(int row, int col) {
 	board[row][col] = -1;
-	for(int r = row + 1; r < board[0].length; r++) {
+	for(int r = col + 1; r < board.length; r++) {
 	    board[row][r] += 1;
 	}
-	//r and c would have to be equal anyway
-	for(int r = row + 1; r < board[0].length; r++) {
-	    board[r][r] += 1;
+	for(int r = row + 1, c = col + 1; r < board.length && c < board.length; r++, c++) {
+	    board[r][c] += 1;
 	}
-	for(int r = 1; r < board[0].length - row; r++) {
-	    board[row - r][col + r] += 1;
+	for(int r = 1, c = 1; (row - r) > -1 && (col + c) < board.length; r++, c++) {
+		board[row - r][col + c] += 1;
 	}
     }
 
     private void removeQueen(int row, int col) {
 	board[row][col] = 0;
-	for(int r = 0; r < board[0].length; r++) {
-	    board[r][col] -= 1;
+	for(int r = col + 1; r < board.length; r++) {
+	    board[row][r] -= 1;
 	}
-	for(int c = 0; c < board[0].length; c++) {
-	    board[row][c] -= 1;
+	for(int r = row + 1, c = col + 1; r < board.length && c < board.length; r++, c++) {
+	    board[r][c] -= 1;
 	}
-	for(int r = 0; r < board[0].length - row; r++) {
-	    board[row + r][col + r] -= 1;
-	}
-	for(int r = 0; r < board[0].length - row; r++) {
-	    board[row + r][col - r] -= 1;
-	}
-	for(int r = 0; r < board[0].length - row; r++) {
-	    board[row - r][col + r] -= 1;
-	}
-	for(int r = 0; r < board[0].length - row; r++) {
-	    board[row - r][col - r] -= 1;
+	for(int r = 1, c = 1; (row - r) > -1 && (col + c) < board.length; r++, c++) {
+		board[row - r][col + c] -= 1;
 	}
     }
     /**
@@ -108,10 +98,12 @@ public class QueenBoard{
     }
 
     public static void main(String[] args) {
-	QueenBoard a = new QueenBoard(5);
+	QueenBoard a = new QueenBoard(6);
 	//a.solve();
 	//System.out.println(a);
-	a.addQueen(2,2);
+	a.addQueen(4,2);
+	System.out.println(a);
+	a.removeQueen(4,2);
 	System.out.println(a);
     }
 }
