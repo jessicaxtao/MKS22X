@@ -14,7 +14,7 @@ public class KnightBoard{
 	}
     }
 
-    public void solve()
+    public boolean solve()
     {
 	return solveH(0,0,1);
     }
@@ -27,27 +27,36 @@ public class KnightBoard{
 	}
 	if(board[r][c] == 0) {
 	}
+	return false;
     }
-
+    //okay just do the thing where you check just make sure you check before you solve h also mak esure level == is right.
     private boolean solveH(int r, int c, int level){
 	if(level == board[0].length * board.length) {
 	    return true;
 	}else{
 	    if(solveH(r + 1, c + 2, level + 1)){
+		board[r+1][c+2] = level + 1;
 	    }
 	    if(solveH(r + 2, c + 1, level + 1)){
+		board[r+2][c+1] = level + 1;
 	    }
 	    if(solveH(r + 1, c - 2, level + 1)){
+		board[r+1][c-2] = level + 1;
 	    }
 	    if(solveH(r + 2, c - 1, level + 1)){
+		board[r+2][c-1] = level + 1;
 	    }
 	    if(solveH(r - 1, c - 2, level + 1)){
+		board[r-1][c-2] = level + 1;
 	    }
 	    if(solveH(r - 2, c - 1, level + 1)){
+		board[r-2][c-1] = level + 1;
 	    }
 	    if(solveH(r - 1, c + 2, level + 1)){
+		board[r-1][c+2] = level + 1;
 	    }
 	    if(solveH(r - 2, c + 1, level + 1)){
+		board[r-2][c+1] = level + 1;
 	    }
 
 	}
