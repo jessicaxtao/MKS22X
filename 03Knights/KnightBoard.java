@@ -64,12 +64,11 @@ public class KnightBoard{
     }
 
     public String toString(){
-	/*
 	String ans = "";
 	for(int row = 0; row < board.length; row++) {
 	    for(int col = 0; col < board[row].length; col++) {
 		if(board[row][col] < 10) {
-		    ans += "  " + board[row][col] + " ";
+		    ans += " " + board[row][col] + " ";
 		}else {
 		    ans += board[row][col] + " ";
 		}
@@ -77,25 +76,10 @@ public class KnightBoard{
 	    ans += "\n";
 	}
     	return ans;
-	*/
-	String fin = "";
-	for (int i = 0; i < board.length ; i++) {
-	    for (int j=0; j < board[i].length; j++) {
-		if (board[i][j]> 99){	    
-		    fin += "" + board[i][j]+ "";}
-		if (board[i][j]>9){
-		    fin += " " + board[i][j] + " ";}
-		else{ fin += "  " + board[i][j] + " ";}
-	    }
-	    fin += "\n" + "\n"; 	    	
-	}	
-	return fin;
     }
-    /*
     public static void main (String[] args) {
-	KnightBoard k = new KnightBoard(8,7);
+	KnightBoard k = new KnightBoard(7,7);
 	k.solve();
 	System.out.println(k);
     }
-    */
 }
