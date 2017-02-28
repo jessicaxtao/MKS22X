@@ -3,9 +3,8 @@ public class KnightBoard{
     
     public KnightBoard(int row, int col){
 	board = new int[row][col];
-	clear();
     }
-
+    /*
     private void clear() {
 	for(int row = 0; row < board.length; row++) {
 	    for(int col = 0; col < board.length; col++) {
@@ -13,68 +12,90 @@ public class KnightBoard{
 	    }
 	}
     }
-
+    */
     public boolean solve()
     {
 	return solveH(0,0,1);
     }
-    
+    /*
     private boolean checker(int r, int c) {
-	if(r > 0 && r < board.length) {
-	
-	}
-	if(c < 0) {
-	}
-	if(board[r][c] == 0) {
+	if(r > 0 && r < board.length && c > 0 && c < board[r].length) {
+	    return true;
 	}
 	return false;
     }
-    //okay just do the thing where you check just make sure you check before you solve h also mak esure level == is right.
+    */
     private boolean solveH(int r, int c, int level){
-	if(level == board[0].length * board.length) {
+	if(level > board[0].length * board.length) {
 	    return true;
-	}else{
+	}
+	
+	if (r<0 || r >= board.length || c<0 || c>= board[0].length){return false;}
+	
+	if(board[r][c] == 0) {
+	    board[r][c] = level;
 	    if(solveH(r + 1, c + 2, level + 1)){
-		board[r+1][c+2] = level + 1;
+		return true;
 	    }
 	    if(solveH(r + 2, c + 1, level + 1)){
-		board[r+2][c+1] = level + 1;
+		return true;
 	    }
 	    if(solveH(r + 1, c - 2, level + 1)){
-		board[r+1][c-2] = level + 1;
+		return true;
 	    }
 	    if(solveH(r + 2, c - 1, level + 1)){
-		board[r+2][c-1] = level + 1;
+		return true;
 	    }
 	    if(solveH(r - 1, c - 2, level + 1)){
-		board[r-1][c-2] = level + 1;
+		return true;
 	    }
 	    if(solveH(r - 2, c - 1, level + 1)){
-		board[r-2][c-1] = level + 1;
+		return true;
 	    }
 	    if(solveH(r - 1, c + 2, level + 1)){
-		board[r-1][c+2] = level + 1;
+		return true;
 	    }
 	    if(solveH(r - 2, c + 1, level + 1)){
-		board[r-2][c+1] = level + 1;
+		return true;
 	    }
-
+	    board[r][c] = 0;
 	}
 	return false;
     }
 
     public String toString(){
+	/*
 	String ans = "";
-	for(int row = 0; row < board[0].length; row++) {
+	for(int row = 0; row < board.length; row++) {
 	    for(int col = 0; col < board[row].length; col++) {
 		if(board[row][col] < 10) {
-		    ans = " " + board[row][col] + " ";
+		    ans += "  " + board[row][col] + " ";
 		}else {
 		    ans += board[row][col] + " ";
 		}
 	    }
 	    ans += "\n";
 	}
-    	return "";
+    	return ans;
+	*/
+	String fin = "";
+	for (int i = 0; i < board.length ; i++) {
+	    for (int j=0; j < board[i].length; j++) {
+		if (board[i][j]> 99){	    
+		    fin += "" + board[i][j]+ "";}
+		if (board[i][j]>9){
+		    fin += " " + board[i][j] + " ";}
+		else{ fin += "  " + board[i][j] + " ";}
+	    }
+	    fin += "\n" + "\n"; 	    	
+	}	
+	return fin;
     }
+    /*
+    public static void main (String[] args) {
+	KnightBoard k = new KnightBoard(8,7);
+	k.solve();
+	System.out.println(k);
+    }
+    */
 }
