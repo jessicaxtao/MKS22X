@@ -77,9 +77,11 @@ public class KnightBoard{
 	}
     	return ans;
     }
+	/*
     public static void main (String[] args) {
 	KnightBoard k = new KnightBoard(7,7);
 	k.solve();
 	System.out.println(k);
     }
+    */
 }
