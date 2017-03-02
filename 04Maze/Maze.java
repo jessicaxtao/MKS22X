@@ -19,10 +19,16 @@ public class Maze{
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
 	animate = false;
+	try {
+
+	}catch(FileNotFoundException e) {
+
+	}
 	for(int r = 0; r < maze.length; r++) {
 	    for(int c = 0; c < maze.length; c++) {
 		if(maze[r][c] == '#') {
 		}
+	    }
 	}
     }
     
