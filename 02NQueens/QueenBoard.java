@@ -91,7 +91,7 @@ public class QueenBoard{
 	}
     }
     
-    public void countSolution() {
+    public void countSolutions() {
 	clear();
 	solutionCount = 0;
 	countH(0);
