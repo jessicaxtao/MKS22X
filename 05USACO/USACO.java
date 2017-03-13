@@ -157,8 +157,4 @@ public class USACO {
 	volume = aggDepth * 72 * 72;
     }
 
-    public static void main(String[] args) {
-	USACO x = new USACO();
-	System.out.println(x.silver("testfile2"));
-    }
 }
