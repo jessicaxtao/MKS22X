@@ -6,10 +6,85 @@ public class USACO {
     int[][] lake;
     int R, C, E, N = -1;
     int volume = 0;
+
+    int n, M, T, R1, C1, R2, C2 = -1;
+    int[][] cow;
+
+    public int silver(String filename) {
+	try{
+	    Scanner scanny = new Scanner(new File(filename));
+	    n = Integer.parseInt(scanny.next());
+	    M = Integer.parseInt(scanny.next());
+	    T = Integer.parseInt(scanny.next());
+	    cow = new int[n][M];
+	    scanny.nextLine();
+	    
+	    String line = "";
+	    for(int i = 0; i < n; i++) {
+		line = scanny.nextLine();
+		//System.out.println(line);
+		for (int r = 0; r < M; r++) {
+		    if (line.charAt(r) == '*') {
+			cow[i][r] = -1;
+		    }
+		    if (line.charAt(r) == '.') {
+			cow[i][r] = 0;
+		    }
+		}
+	    }  
+	    R1 = Integer.parseInt(scanny.next()) - 1;
+	    C1 = Integer.parseInt(scanny.next()) - 1;
+	    R2 = Integer.parseInt(scanny.next()) - 1;
+	    C2 = Integer.parseInt(scanny.next()) - 1;
+	}catch(FileNotFoundException e) {
+	    System.out.println("check your filename");
+	    System.exit(1);
+	}
+	return silverH(cow, T);
+    }
     
-    public USACO() {
+   private int silverH(int[][] cow, int time){
+	int times = 0;
+	
+	for(int i = 0; i <= time; i++){
+	    int[][] count = new int[n][M];
+	    for (int r = 0; r < n; r++){
+		for (int c = 0; c < M; c++){
+		    if (i == 0){
+			count[R1][C1] = 1;
+		    }
+		    if(cow[r][c]==-1){
+			count[r][c] = -1;
+		    }
+		    if(r >= 1 && cow[r-1][c] > 0){
+			count[r][c] += cow[r-1][c];
+		    }
+		    if(c >= 1 && cow[r][c-1] > 0){
+			count[r][c] += cow[r][c-1];
+		    }
+		    if(r < n - 1 && cow[r+1][c] > 0){
+		        count[r][c] += cow[r+1][c];
+		    }
+		    if(c < M - 1 && cow[r][c+1] > 0){
+		        count[r][c] += cow[r][c+1];
+		    }
+		    if(cow[r][c]==-1){
+			count[r][c] = -1;
+		    }
+
+		}
+	    }
+	    cow = count;
+	}
+
+	times = cow[R2][C2];
+
+	return times;
     }
 
+    public USACO() {
+    }
+    
     public int bronze(String filename) {
 	int[][] stompInstruc;
 	
@@ -84,6 +159,6 @@ public class USACO {
 
     public static void main(String[] args) {
 	USACO x = new USACO();
-	System.out.println(x.bronze("testfile1"));
+	System.out.println(x.silver("testfile2"));
     }
 }
