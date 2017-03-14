@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.lang.Math;
-public class Problem {
+public class Quiz2Redux {
     public static void combinationH(String s, ArrayList<String> words, int length) {
 	words.add(s);
 	if(words.size() == length) {
