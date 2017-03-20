@@ -6,11 +6,17 @@ public class Quick {
     }
 
     private static int quickselectH(int[] data, int k, int start, int end){
-        if (end == start) return data[end];
-        int pivot = part(data, start, end);
-        if (pivot == k) return data[pivot];
-        else if (pivot > k) return quickselectH(data, k, 0, pivot - 1);
-        else return quickselectH(data, k, pivot + 1, data.length - 1);
+	if(start == end) {
+	    return data[end];
+	}
+	int newPiv = part(data, start, end);
+	if(newPiv == k) {
+	    return data[newPiv];
+	}else if(newPiv > k) {
+	    return quickselectH(data, k, 0, newPiv - 1);
+	}else {
+	    return quickselectH(data, k, newPiv + 1, data.length - 1);
+	}
     }
 
     public static void quicksort(int[] data){
@@ -27,14 +33,14 @@ public class Quick {
 
     public static int part(int[] data, int start, int end) {
 	Random rando = new Random();
-	//int pivot = rando.nextInt(end - start + 1) + start;
-	int pivot = 2;
+	int pivot = rando.nextInt(end - start + 1) + start;
 	int temp;
 	while(start <= end) {
-	    while(data[start] <= data[pivot]) {
+	    //AHHHHHH I SPENT SO LONG BECAUSE I PUT START <= END AFTER THE DATA[START] THING BECAUSE I ONLY REALIZED IT WAS A PROBLEM AFTERWARD AND THAT TOOK ME SO SO SO LONG TO FIND IM SO MAD AT MYSELF
+	    while(start <= end && data[start] <= data[pivot]) {
 		start++;
 	    }
-	    while(data[end] > data[pivot]) {
+	    while(start <= end && data[end] > data[pivot]) {
 		end--;
 	    }
 	    if(start <= end) {
@@ -56,7 +62,8 @@ public class Quick {
 	//System.out.println(b);
 	//quicksort(data);
 	String c = "";
-	System.out.println(part(data, 0, 5));
+        System.out.println(quickselect(data, 3));
+	//System.out.println(part(data, 0, 5));
 	for(int i = 0; i < data.length; i++){
 	    c += data[i] + ",";
 	}
