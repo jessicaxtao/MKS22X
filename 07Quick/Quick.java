@@ -6,17 +6,17 @@ public class Quick {
     }
 
     private static int quickselectH(int[] data, int k, int start, int end){
-	if(start == end) {
-	    return data[end];
+	while(start <= end) {
+	    int newPiv = part(data, start, end);
+	    if(newPiv == k) {
+		return data[newPiv];
+	    }else if(newPiv > k) {
+		return quickselectH(data, k, 0, newPiv - 1);
+	    }else {
+		return quickselectH(data, k, newPiv + 1, data.length - 1);
+	    }
 	}
-	int newPiv = part(data, start, end);
-	if(newPiv == k) {
-	    return data[newPiv];
-	}else if(newPiv > k) {
-	    return quickselectH(data, k, 0, newPiv - 1);
-	}else {
-	    return quickselectH(data, k, newPiv + 1, data.length - 1);
-	}
+	return data[end];
     }
 
     public static void quicksort(int[] data){
@@ -24,10 +24,10 @@ public class Quick {
     }
 
     private static void quicksortH(int[] data, int start, int end){
-        if (start < end){
-            int pivot = part(data, start, end);
-            quicksortH(data, start, pivot - 1);
-            quicksortH(data, pivot + 1, end);
+        if (start <= end){
+            int newPiv = part(data, start, end);
+            quicksortH(data, start, newPiv - 1);
+            quicksortH(data, newPiv + 1, end);
         }
     }
 
@@ -54,7 +54,7 @@ public class Quick {
 	data[end] = temp;
 	return end;
     }
-
+    /*
     public static void main(String[] args) {
 	int[] data = {2, 10, 15, 23, 0, 5};
 	//System.out.println(part(data, 0, 3));
@@ -62,11 +62,13 @@ public class Quick {
 	//System.out.println(b);
 	//quicksort(data);
 	String c = "";
-        System.out.println(quickselect(data, 3));
+        //System.out.println(quickselect(data, 2));
 	//System.out.println(part(data, 0, 5));
+	quicksort(data);
 	for(int i = 0; i < data.length; i++){
 	    c += data[i] + ",";
 	}
 	System.out.println(c);
     }
+    */
 }
