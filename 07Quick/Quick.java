@@ -9,10 +9,10 @@ public class Quick {
     private static int quickselectH(int[] data, int k, int start, int end){
 	while(start <  end) {
 	    int[] newPiv = part(data, start, end);
-	    if(newPiv[0] == k) {
+	    if(newPiv[0] <= k && newPiv[1] >= k) {
 		return data[newPiv[0]];
-	    } else if(newPiv[0] > k) {
-		return quickselectH(data, k, 0, newPiv[0]-1);
+	    }else if(newPiv[0] > k) {
+		return quickselectH(data, k, 0, newPiv[0] - 1);
 	    }else {
 		return quickselectH(data, k, newPiv[1] + 1, data.length - 1);
 	    }
@@ -92,8 +92,10 @@ public class Quick {
     public static void main(String[] args) {
 	int[] data = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 15, 23, 0, 5};
 	//System.out.println(part(data, 0, 3));
-	  int b = quickselect(data, 3);
+	  int b = quickselect(data, 1);
 	  System.out.println(b);
+	  int d = quickselect(data, 20);
+	  System.out.println(d);
 	//quicksort(data);
 	String c = "";
         //System.out.println(quickselect(data, 2));
