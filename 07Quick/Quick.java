@@ -11,11 +11,11 @@ public class Quick {
 	    int[] newPiv = part(data, start, end);
 	    if(newPiv[0] <= k && newPiv[1] >= k) {
 		return data[newPiv[0]];
-	    }else if(newPiv[0] > k) {
-		return quickselectH(data, k, 0, newPiv[0] - 1);
-	    }else {
-		return quickselectH(data, k, newPiv[1] + 1, data.length - 1);
-	    }
+	    }//else if(newPiv[0] > k) {
+	    //	return quickselectH(data, k, 0, newPiv[0] - 1);
+	    // }else {
+	    //	return quickselectH(data, k, newPiv[1] + 1, data.length - 1);
+	    //  }
 	}
 	return data[end];
     }
