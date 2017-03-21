@@ -24,11 +24,36 @@ public class Quick {
     }
 
     private static void quicksortH(int[] data, int start, int end){
-        if (start <= end){
-            int newPiv = part(data, start, end);
-            quicksortH(data, start, newPiv - 1);
-            quicksortH(data, newPiv + 1, end);
-        }
+	if(start < end) {
+	    Random rando = new Random();
+	    int pivot = rando.nextInt(end - start + 1) + start;
+	    int v = data[pivot];
+	    swap(data, pivot, start);
+	    int lt = start + 1;
+	    int i = start;
+	    int gt = end;
+	
+	    while(i <= gt){
+		if(data[i] < v) {
+		    swap(data, i, lt);
+		    lt++;
+		    i++;
+		}else if(data[i] == v) {
+		    i++;
+		}else {
+		    swap(data, i, gt);
+		    gt--;
+		}
+	    }
+	    quicksortH(data, start, lt - 1);
+	    quicksortH(data, gt + 1, end);
+	}
+    }
+
+    private static void swap(int[] data, int a, int b) {
+	int temp = data[a];
+	data[a] = data[b];
+	data[b] = temp;
     }
 
     public static int part(int[] data, int start, int end) {
@@ -71,4 +96,5 @@ public class Quick {
 	System.out.println(c);
     }
     */
+
 }
