@@ -1,13 +1,14 @@
 import java.util.*;
 
 public class Quick {
+    /*
     public static int quickselect(int[] data, int k){
         return quickselectH(data, k, 0, data.length - 1);
     }
-
+    
     private static int quickselectH(int[] data, int k, int start, int end){
 	while(start <= end) {
-	    int newPiv = part(data, start, end);
+	    int[] newPiv = part(data, start, end);
 	    if(newPiv == k) {
 		return data[newPiv];
 	    }else if(newPiv > k) {
@@ -18,33 +19,16 @@ public class Quick {
 	}
 	return data[end];
     }
-
+    */
     public static void quicksort(int[] data){
         quicksortH(data, 0, data.length - 1);
     }
 
     private static void quicksortH(int[] data, int start, int end){
-	if(start < end) {
-	    Random rando = new Random();
-	    int pivot = rando.nextInt(end - start + 1) + start;
-	    int v = data[pivot];
-	    swap(data, pivot, start);
-	    int lt = start + 1;
-	    int i = start;
-	    int gt = end;
-	
-	    while(i <= gt){
-		if(data[i] < v) {
-		    swap(data, i, lt);
-		    lt++;
-		    i++;
-		}else if(data[i] == v) {
-		    i++;
-		}else {
-		    swap(data, i, gt);
-		    gt--;
-		}
-	    }
+	if (start < end){
+	    int[] newPiv = part(data, start, end);
+	    int lt = newPiv[0];
+	    int gt = newPiv[1];
 	    quicksortH(data, start, lt - 1);
 	    quicksortH(data, gt + 1, end);
 	}
@@ -55,7 +39,7 @@ public class Quick {
 	data[a] = data[b];
 	data[b] = temp;
     }
-
+    /*
     public static int part(int[] data, int start, int end) {
 	Random rando = new Random();
 	int pivot = rando.nextInt(end - start + 1) + start;
@@ -79,9 +63,34 @@ public class Quick {
 	data[end] = temp;
 	return end;
     }
-    /*
+    */
+    public static int[] part(int[] data, int start, int end) {
+	Random rando = new Random();
+	int pivot = rando.nextInt(end - start + 1) + start;
+	int v = data[pivot];
+	swap(data, pivot, start);
+	int lt = start + 1;
+	int i = start;
+	int gt = end;
+	
+	while(i <= gt){
+	    if(data[i] < v) {
+		swap(data, i, lt);
+		lt++;
+		i++;
+	    }else if(data[i] == v) {
+		i++;
+	    }else {
+		swap(data, i, gt);
+		gt--;
+	    }
+	}
+	int[] ans = {lt, gt};
+	return ans;
+    }
+
     public static void main(String[] args) {
-	int[] data = {2, 10, 15, 23, 0, 5};
+	int[] data = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 15, 23, 0, 5};
 	//System.out.println(part(data, 0, 3));
 	//int b = quickselect(data, 3);
 	//System.out.println(b);
@@ -93,8 +102,9 @@ public class Quick {
 	for(int i = 0; i < data.length; i++){
 	    c += data[i] + ",";
 	}
+	c = c.substring(0,c.length() - 1);
 	System.out.println(c);
     }
-    */
+
 
 }
