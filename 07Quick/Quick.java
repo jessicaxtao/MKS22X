@@ -94,8 +94,6 @@ public class Quick {
 	//System.out.println(part(data, 0, 3));
 	  int b = quickselect(data, 1);
 	  System.out.println(b);
-	  int d = quickselect(data, 20);
-	  System.out.println(d);
 	//quicksort(data);
 	String c = "";
         //System.out.println(quickselect(data, 2));
