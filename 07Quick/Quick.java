@@ -7,15 +7,15 @@ public class Quick {
     }
     
     private static int quickselectH(int[] data, int k, int start, int end){
-	while(start <  end) {
+	while(start < end) {
 	    int[] newPiv = part(data, start, end);
 	    if(newPiv[0] <= k && newPiv[1] >= k) {
 		return data[newPiv[0]];
-	    }//else if(newPiv[0] > k) {
-	    //	return quickselectH(data, k, 0, newPiv[0] - 1);
-	    // }else {
-	    //	return quickselectH(data, k, newPiv[1] + 1, data.length - 1);
-	    //  }
+	    }else if(newPiv[0] > k) {
+		return quickselectH(data, k, start, newPiv[0] - 1);
+	    }else {
+		return quickselectH(data, k, newPiv[1] + 1, data.length - 1);
+	    }
 	}
 	return data[end];
     }
@@ -88,11 +88,12 @@ public class Quick {
 	int[] ans = {lt, gt};
 	return ans;
     }
-
+    /*
     public static void main(String[] args) {
 	int[] data = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 15, 23, 0, 5};
+	//int[] data = {5, 4, 2, 9, 0, 1, 3, 6, 8, 7};
 	//System.out.println(part(data, 0, 3));
-	  int b = quickselect(data, 1);
+	  int b = quickselect(data, 37);
 	  System.out.println(b);
 	//quicksort(data);
 	String c = "";
@@ -105,6 +106,6 @@ public class Quick {
 	c = c.substring(0,c.length() - 1);
 	System.out.println(c);
     }
-
+    *.
 
 }
