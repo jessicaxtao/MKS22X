@@ -106,6 +106,6 @@ public class Quick {
 	c = c.substring(0,c.length() - 1);
 	System.out.println(c);
     }
-    *.
+    */
 
 }
