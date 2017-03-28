@@ -1,0 +1,19 @@
+public class MyLinkedList() {
+    LNode start;
+    int size;
+
+    public MyLinkedList() {
+
+    }
+
+    public boolean add(int value) {
+	
+    }
+
+    public String toString() {
+	LNode current = start;
+	for(int i = 0; i < start.size(); i++) {
+	    
+	} 
+    }
+}
