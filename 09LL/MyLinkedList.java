@@ -1,4 +1,6 @@
-public class MyLinkedList{
+import java.util.*;
+
+public class MyLinkedList implements Iterable<Integer> {
 
     private class LNode{
 
@@ -23,13 +25,16 @@ public class MyLinkedList{
 
     }
 
-    public boolean add(int value) {
-        add(size -1, value);
-	return true;
+    private LNode getNthNode(int n) {
+	for(int i = 0; i < n; i++) {
+	
     }
 
-    public int size() {
-        return size;
+    private void addAfter(LNode location, LNode toBeAdded) {
+	add(size-1, tobeAdded);
+    }
+
+    private void remove(LNode target) {
     }
 
     public String toString() {
@@ -41,6 +46,15 @@ public class MyLinkedList{
         }
         if (size == 0) return s + "]";
         return s.substring(0, s.length() - 2) + "]";
+    }
+
+    public boolean add(int value) {
+        add(size -1, value);
+	return true;
+    }
+
+    public int size() {
+        return size;
     }
 
     public int get(int index) {
