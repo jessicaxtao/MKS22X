@@ -83,11 +83,12 @@ public class MyLinkedList implements Iterable<Integer> {
 	if(size == 0) {
 	    head = toBeAdded;
 	    tail = toBeAdded;
-	}else if(location.next == null) {
+	}else if(location == tail) {
 	    tail = toBeAdded;
 	    location.next = toBeAdded;
 	    toBeAdded.prev = location;
-	}else if(location.prev == null) {
+	    toBeAdded.next = null;
+	}else if(location == head) {
 	    head = toBeAdded;
 	    location.prev = toBeAdded;
 	    toBeAdded.next = location;
@@ -102,12 +103,15 @@ public class MyLinkedList implements Iterable<Integer> {
     }
 
     private void remove(LNode target) {
-	if(target == head) {
-	    head = start.next;
-	    head.prev = null;
-	}else if(target == end) {
-	    end = end.prev;
-	    end.next = null;
+	if(size == 1) {
+	    head = null;
+	    tail = null;
+	}else if(target == head) {
+	    head.next.prev = null;
+	    head = head.next;
+	}else if(target == tail) {
+	    tail.prev.next = null;
+	    tail = tail.prev;
 	}else {
 	    target.prev.next = target.next;
 	    target.next.prev = target.prev;
@@ -117,7 +121,7 @@ public class MyLinkedList implements Iterable<Integer> {
 
     public String toString() {
         String s = "[";
-        LNode current = start;
+        LNode current = head;
         for (int i = 0; i < size; i++) {
             s = s + current.element + ", ";
             current = current.next;
@@ -130,39 +134,19 @@ public class MyLinkedList implements Iterable<Integer> {
         return s.substring(0, s.length() - 2) + "]";
     }
 
-    public boolean add(int value) {
-        add(size -1, value);
-	return true;
-    }
 
     public int size() {
         return size;
     }
 
     public int get(int index) {
-        if (index >= size) {
-	    throw new IndexOutOfBoundsException();
-        }
-        int counter = 0;
-        LNode current = start;
-        while (counter < index) {
-            current = current.next;
-            counter++;
-        }
-        return current.element;
+        return getNthNode(index).value;
     }
 
     public void set(int index, int value) {
-        if (index >= size) {
-	    throw new IndexOutOfBoundsException();
-	}
-        int counter = 0;
-        LNode current = start;
-        while (counter < index) {
-            current = current.next;
-            counter++;
-        }
-        current.element = value;
+	int old = getNthNode(index).value;
+        getNthNode(index).value = value;
+	return old;
     }
 
     public int indexOf(int value) {
@@ -176,6 +160,11 @@ public class MyLinkedList implements Iterable<Integer> {
             counter++;
         }
         return counter;
+    }
+
+    public boolean add(int value) {
+        add(size -1, value);
+	return true;
     }
 
     public void add(int index, int value) {
