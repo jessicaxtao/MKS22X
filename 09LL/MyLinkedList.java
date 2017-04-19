@@ -2,32 +2,81 @@ import java.util.*;
 
 public class MyLinkedList implements Iterable<Integer> {
 
-    private class LNode{
-
+    private class LNode {
+	
         private int element;
-        private LNode next;
+        private LNode next, prev;
 
-        private LNode(int ele){
-            element = ele;
+        public LNode(int ele){
+            this.element = ele;
         }
-
-        private LNode(int ele, LNode n){
-            element = ele;
-            next = n;
-        }
-
+	
+	public String toString() {
+	    return value + "";
+	}
+	
     }
 
-    private LNode start;
-    private int size;
+    public class MyLinkedListIterator implements Iterator<Integer> {
+	
+	private MyLinkedList bob;
+	private LNode current;
+
+	public MyLinkedListIterator(MyLinkedList george) {
+	    current = george.head;
+	    this.bob = george;
+	}
+
+	public boolean hasNext() {
+	    return bob.next != null;
+	}
+
+	public Integer next() {
+	    if(hasNext()) {
+		int val - current.value;
+		current = current.next;
+		return val;
+	    }else{
+		throw new NoSuchElementException();
+	    }
+	}
+	
+	public void remove() {
+	    throw new UnsupportedOperationException();
+	}
+	
+    }
+    
+    public Iterator<Integer> iterator() {
+	return new MyLinkedListIterator(this);
+    }
+
+    LNode head = null, tail = null;
+    int size = 0;
 
     public MyLinkedList(){
-
     }
 
+    public int size() {
+	return size;
+    }
+    
     private LNode getNthNode(int n) {
-	for(int i = 0; i < n; i++) {
-	
+        if(n < 0 || n >= size) {
+	    throw new IndexOutOfBoundsException();
+	}
+	if(n > size/2) {
+	    LNode current = tail;
+	    for(int i = size; i > n - 1; i--){
+		current = current.prev;
+	    }
+	}else{
+	    LNode current = start;
+	    for(int i = n; i > 0; i--) {
+		current = current.next;
+	    }
+	}
+	return current;
     }
 
     private void addAfter(LNode location, LNode toBeAdded) {
@@ -44,7 +93,11 @@ public class MyLinkedList implements Iterable<Integer> {
             s = s + current.element + ", ";
             current = current.next;
         }
-        if (size == 0) return s + "]";
+	
+        if (size == 0) {
+	    return s + "]";
+	}
+	
         return s.substring(0, s.length() - 2) + "]";
     }
 
@@ -137,6 +190,31 @@ public class MyLinkedList implements Iterable<Integer> {
         return index;
     }
 
+    public int get(int index) {
+	LNode n = getNthNode(index);
+	return n.value;
+    }
+
+    public int set(int index, int value) {
+	LNode n = getNthNode(index);
+	int temp = n.value;
+	n.value = value;
+	return temp;
+    }
+
+    public int indexOf(int value) {
+	int index = 0;
+	LNode current = start;
+	if(index == size) {
+	    return -1;
+	}
+	while(current.value != value) {
+	    index++;
+	    current = current.next;
+	}
+	return index;
+    }
+    
     public static void main(String[] args) {
 	MyLinkedList a = new MyLinkedList();
 	a.add(3);
