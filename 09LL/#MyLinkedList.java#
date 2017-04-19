@@ -83,11 +83,12 @@ public class MyLinkedList implements Iterable<Integer> {
 	if(size == 0) {
 	    head = toBeAdded;
 	    tail = toBeAdded;
-	}else if(location.next == null) {
+	}else if(location == tail) {
 	    tail = toBeAdded;
 	    location.next = toBeAdded;
 	    toBeAdded.prev = location;
-	}else if(location.prev == null) {
+	    toBeAdded.next = null;
+	}else if(location == head) {
 	    head = toBeAdded;
 	    location.prev = toBeAdded;
 	    toBeAdded.next = location;
