@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class Eval {
+public class StackCalc {
     public static double eval(String s) {
 	String[] tokens = s.split(" ");
 	Stack<Double> values = new Stack<Double>();
@@ -23,20 +23,17 @@ public class Eval {
 
     public static double apply(String op, Double x, Double y) {
 	if(op.equals("+")) {
-	    return x + y;
+	    return y + x;
 	}else if(op.equals("-")) {
-	    return x - y;
+	    return y - x;
 	}else if(op.equals("*")) {
-	    return x * y;
+	    return y * x;
 	}else if(op.equals("/")) {
-	    return x / y;
+	    return y / x;
 	}else if(op.equals("%")) {
-	    return x % y;
+	    return y % x;
 	}else {
 	    return -1;
 	}
-    }
-
-    public static void main(String[] args) {
     }
 }
