@@ -3,10 +3,20 @@ public class ExpressionTree{
   /*return the value of the specified expression tree*/
   public double evaluate(){
     /*you are to write this method*/
-      if(this.isOp()) {
-	  return perform(getOp(), getLeft().evaluate(), getRight().evaluate());
-      }else {
+      if(isValue() == true) {
 	  return getValue();
+      }
+      char oper = getOp();
+      if(oper == '+') {
+	  return getLeft().evaluate() + getRight().evaluate();
+      }else if(oper == '-') {
+	  return getLeft().evaluate() - getRight().evaluate();
+      }else if(oper == '*') {
+	  return getLeft().evaluate() * getRight().evaluate();
+      }else if(oper == '/') {
+	  return getLeft().evaluate() / getRight().evaluate();
+      }else {
+	  return getLeft().evaluate() % getRight().evaluate();
       }
   }
   
@@ -14,22 +24,20 @@ public class ExpressionTree{
   /* The sample tree would be: "( 3 + (2 * 10))"     */
   public String toString(){
     /*you are to write this method*/
-      if(isValue()) {
+      if(isValue() == true) {
 	  return "" + getValue();
-      }else{
-	  return "(" + getLeft().toString() + getOp() + getRight().toString() + ")";
       }
+      return "(" + getLeft() + " " + getOp() + " " + getRight() + ")";
   }
   
   /*return the expression as a postfix notation string without parenthesis*/
   /* The sample tree would be: "3 2 10 * +"     */
   public String toStringPostfix(){
     /*you are to write this method*/
-      if(isValue()) {
+      if(isValue() == true) {
 	  return "" + getValue();
-      }else {
-	  return "" + getLeft().toStringPostfix() + getRight().toStringPostfix() + getOp();
       }
+      return getLeft().toStringPostfix() + " " + getRight().toStringPostfix() + " " + getOp();
   }
   
   /*return the expression as a prefix notation string without parenthesis*/
@@ -37,12 +45,11 @@ public class ExpressionTree{
   
   public String toStringPrefix(){
     /*you are to write this method*/
-      if(isValue()) {
+      if(isValue() == true) {
 	  return "" + getValue();
-      }else {
-	  return getOp() + getRight().toStringPrefix() + getLeft().toStringPrefix();
       }
-}
+      return getOp() + " " + getLeft().toStringPrefix() + " " + getRight().toStringPrefix();
+  }
   
   
   
