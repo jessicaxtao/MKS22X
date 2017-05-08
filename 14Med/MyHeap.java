@@ -13,27 +13,27 @@ public class MyHeap {
 	heap.add(null);
     }
 
-    public MyHeap(boolean mode){
+    public MyHeap(boolean mode) {
         max = mode;
         size = 0;
         heap = new ArrayList<Integer>();
 	heap.add(null);
     }
 
-    public void add(Integer s){
+    public void add(Integer s) {
         heap.add(s);
         size++;
         pushUp();
     }
 
-    public Integer remove(){
+    public Integer remove() {
         Integer s = heap.set(1, heap.remove(size));
-        size --;
+        size--;
         pushDown();
         return s;
     }
 
-    public Integer peek(){
+    public Integer peek() {
         return heap.get(1);
     }
     
@@ -41,7 +41,7 @@ public class MyHeap {
 	return this.size;
     }
 
-    private void pushUp(){
+    private void pushUp() {
         int index = size;
         if (max == true){
             while (index > 1 && heap.get(index).compareTo(heap.get(index / 2)) > 0){
@@ -59,15 +59,17 @@ public class MyHeap {
         }
     }
 
-    private void pushDown(){
+    private void pushDown() {
         int index = 1;
-        boolean bob = true;
+        boolean bounds = true;
         if (max == true){
-            while (index * 2 <= size && bob){
+            while (index * 2 <= size && bounds) {
                 int left = heap.get(index).compareTo(heap.get(index * 2));
                 int right = heap.get(index).compareTo(heap.get(index * 2 + 1));
-                if (left > 0 && right > 0) bob = false;
-                else if (left > right){
+                if (left > 0 && right > 0) {
+		    bounds = false;
+		}
+                else if (left > right) {
                     Integer temp = heap.set(index, heap.get(index * 2 + 1));
                     heap.set(index * 2 + 1, temp);
                     index = index * 2 + 1;
@@ -80,11 +82,13 @@ public class MyHeap {
             }
         }
         else {
-            while (index * 2 <= size && bob){
+            while (index * 2 <= size && bounds) {
                 int left = heap.get(index).compareTo(heap.get(index * 2));
                 int right = heap.get(index).compareTo(heap.get(index * 2 + 1));
-                if (left < 0 && right < 0) bob = false;
-                else if (left < right){
+                if (left < 0 && right < 0) {
+		    bounds = false;
+		}
+                else if (left < right) {
                     Integer temp = heap.set(index, heap.get(index * 2 + 1));
                     heap.set(index * 2 + 1, temp);
                     index = index * 2 + 1;
@@ -99,7 +103,7 @@ public class MyHeap {
         }
     }
 
-    public String toString(){
+    public String toString() {
         String ans = "";
 	for(int i = 0; i < size; i++) {
 	    ans += heap.get(i) + " ";
@@ -107,20 +111,12 @@ public class MyHeap {
 	return ans;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 	MyHeap a = new MyHeap(true);
 	a.add(9);
 	a.add(3);
-    // a.add("hello");
 	System.out.println(2+a.peek());
 	a.remove();
-    // System.out.println("top "+a.peek());
-    // a.remove();
-    // System.out.println("top "+a.peek());
-    // a.remove();
-    // System.out.println("top "+a.peek());
-    // a.remove();
-    // System.out.println("top "+a.peek());
-}
+    }
 
 }
