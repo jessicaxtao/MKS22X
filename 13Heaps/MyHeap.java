@@ -22,14 +22,16 @@ public class MyHeap{
 
     public void add(String s){
         heap.add(s);
-        size++;
         pushUp();
+	size++;
     }
 
     public String remove(){
-        String s = heap.set(1, heap.remove(size));
-        size --;
+        String s = heap.get(1);
+	heap.set(1, heap.get(size));
+	heap.remove(size);
         pushDown();
+	size--;
         return s;
     }
 
@@ -37,62 +39,53 @@ public class MyHeap{
         return heap.get(1);
     }
 
+    public int size() {
+	return this.size;
+    }
+
     private void pushUp(){
         int index = size;
         if (max == true){
             while (index > 1 && heap.get(index).compareTo(heap.get(index / 2)) > 0){
-                String temp = heap.set(index, heap.get(index / 2));
-                heap.set(index / 2, temp);
-                index /= 2;
+		swap(index, index / 2);
+		index /= 2;
             }
         }
         else {
             while (index > 1 && heap.get(index).compareTo(heap.get(index / 2)) < 0){
-                String temp = heap.set(index, heap.get(index / 2));
-                heap.set(index / 2, temp);
-                index /= 2;
+                swap(index, index / 2);
+		index /= 2;
             }
         }
     }
 
     private void pushDown(){
-        int index = 1;
-        boolean bob = true;
-        if (max == true){
-            while (index * 2 <= size && bob){
-                int left = heap.get(index).compareTo(heap.get(index * 2));
-                int right = heap.get(index).compareTo(heap.get(index * 2 + 1));
-                if (left > 0 && right > 0) bob = false;
-                else if (left > right){
-                    String temp = heap.set(index, heap.get(index * 2 + 1));
-                    heap.set(index * 2 + 1, temp);
-                    index = index * 2 + 1;
-                }
-                else {
-                    String temp = heap.set(index, heap.get(index * 2));
-                    heap.set(index * 2, temp); 
-                    index *= 2;
-                }
-            }
-        }
-        else {
-            while (index * 2 <= size && bob){
-                int left = heap.get(index).compareTo(heap.get(index * 2));
-                int right = heap.get(index).compareTo(heap.get(index * 2 + 1));
-                if (left < 0 && right < 0) bob = false;
-                else if (left < right){
-                    String temp = heap.set(index, heap.get(index * 2 + 1));
-                    heap.set(index * 2 + 1, temp);
-                    index = index * 2 + 1;
-                }
-                else {
-                    String temp = heap.set(index, heap.get(index * 2));
-                    heap.set(index * 2, temp); 
-                    index *= 2;
-                }
+	int index = 1;
+	while(index < size / 2) {
+	    if(max == true){
+		if(heap.get(index).compareTo(heap.get(index*2)) < 0) {
+		    swap(index, index * 2 + 1);
+		}
+		if(heap.get(index).compareTo(heap.get(index*2+1)) < 0) {
+		    swap(index, index * 2);
+		}
+	    }else{
+		if(heap.get(index).compareTo(heap.get(index*2)) > 0) {
+		    swap(index, index * 2);
+		}
+		if(heap.get(index).compareTo(heap.get(index*2+1)) > 0) {
+		    swap(index, index * 2 + 1);
+		}	
+	    }
+	    index*=2;
+	}
+    }
 
-            }
-        }
+	
+    private void swap(int a, int b) {
+	String temp = heap.get(a);
+	heap.set(a, heap.get(b));
+	heap.set(b, temp);
     }
 
     public String toString(){
@@ -102,21 +95,5 @@ public class MyHeap{
 	}
 	return ans;
     }
-
-    public static void main(String[] args){
-	MyHeap a=new MyHeap(true);
-	a.add("pineapplee");
-	a.add("georgeeee");
-    // a.add("hello");
-	System.out.println("top "+a.peek());
-	a.remove();
-    // System.out.println("top "+a.peek());
-    // a.remove();
-    // System.out.println("top "+a.peek());
-    // a.remove();
-    // System.out.println("top "+a.peek());
-    // a.remove();
-    // System.out.println("top "+a.peek());
-}
 
 }
