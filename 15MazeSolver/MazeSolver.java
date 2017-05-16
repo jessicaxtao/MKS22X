@@ -1,9 +1,8 @@
 public class MazeSolver {
-    private class Location {
-	private int row, col;
-	private Location previous;
-	private int distanceToStart;
+    public MazeSolver(String m) {
     }
-    private class FrontierPriorityQueue {
+    public void solve() {
+    }
+    public void solve(int a) {
     }
 }
