@@ -1,8 +1,8 @@
 public class FrontierPriorityQueue implements Frontier{
-    PriorityQueue<Location> frontier;
+    private MyHeap frontier;
 
     public FrontierPriorityQueue() {
-	frontier = new FrontierPriorityQueue<Location>();
+	frontier = new MyHeap();
     }
 
     public void add(Location z) {
@@ -10,5 +10,18 @@ public class FrontierPriorityQueue implements Frontier{
     }
 
     public Location next() {
+	return frontier.remove();
+    }
+
+    public Location peek() {
+	return frontier.peek();
+    }
+
+    public int size() {
+	return frontier.size();
+    }
+
+    public boolean hasNext() {
+	return !(frontier.peek() == null);
     }
 }
