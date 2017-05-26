@@ -1,6 +1,9 @@
+import java.util.*;
+
 public class StackFrontier implements Frontier{
 
-    Stack<Location> frontier;
+    private Stack<Location> frontier;
+    private int size;
 
     public StackFrontier() {
 	frontier = new Stack<Location>();
@@ -16,15 +19,11 @@ public class StackFrontier implements Frontier{
 	return frontier.pop();
     }
 
-    public Location peek() {
-	return frontier.peek();
-    }
-
     public int size() {
 	return size;
     }
 
     public boolean hasNext() {
-	return !(frontier.peek() == null);
+	return !frontier.isEmpty();
     }
 }

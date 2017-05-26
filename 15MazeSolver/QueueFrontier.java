@@ -1,29 +1,30 @@
+import java.util.*;
+
 public class QueueFrontier implements Frontier {
-    Queue<Location> frontier;
+
+    private LinkedList<Location> frontier;
+    private int size;
 
     public QueueFrontier() {
-	frontier = new Queue<Location>();
+	frontier = new LinkedList<Location>();
     }
 
     public void add(Location z) {
 	frontier.add(z);
+	size++;
     }
 
     public Location next() {
+	size--;
 	return frontier.remove();
     }
 
-
-    public Location peek(){
-	return frontier.peek();
+    public int size() {
+	return size;
     }
 
-    public int size(){
-	return frontier.size();
-    }
-
-    public boolean hasNext(){
-	return !(frontier.peek() == null);
+    public boolean hasNext() {
+	return !frontier.isEmpty();
     }
 
 }

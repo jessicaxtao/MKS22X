@@ -1,22 +1,56 @@
 public class Location implements Comparable<Location> {
 
-	int row, col, distA, distB;
+	int row, col, distToStart, distToGoal;
 	Location prev;
-	boolean astar;
+	boolean aStar;
 
-	public Location(int r, int c, Location previous, int distToStart, int distToGoal, boolean aStar){
+	public Location(int r, int c, Location previous, int distA, int distB, boolean a){
 		row = r;
 		col = c;
 		prev = previous;
-		distA = distToStart;
-		distB = distToGoal;
-		astar = aStar;
+		distToStart = distA;
+		distToGoal = distB;
+		aStar = a;
 	}
 
-	public int compareTo(Location other){
-	    if (astar == true) {
-		return (distA + distB) - (other.distA + other.distB);
-	    }
-		return distB - other.distB;
+    public Location(int distB) {
+	distToGoal = distB;
+	aStar = false;
+    }
+
+    public int compareTo(Location other){
+	if (aStar == true) {
+	    return (distToStart + distToGoal) - (other.distToStart + other.distToGoal);
 	}
+	return distToGoal - other.distToGoal;
+    }
+
+    //accessors
+    public int getRow() {
+	return row;
+    }
+
+    public int getCol() {
+	return col;
+    }
+
+    public int getDistToStart() {
+	return distToStart;
+    }
+
+    public int getDistToGoal() {
+	return distToGoal;
+    }
+
+    public boolean getAStar() {
+	return aStar;
+    }
+
+        public void setAStar(boolean x) {
+	    aStar = x;;
+    }
+
+    public Location getPrev() {
+	return prev;
+    }
 }
