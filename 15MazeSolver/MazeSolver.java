@@ -20,9 +20,6 @@ public class MazeSolver {
 
     public void solve(int style) {
 	
-	frontman.add(maze.getStart());
-	boolean solu = false;
-	
 	if(style == 0) {
 	    frontman = new StackFrontier();
 	}else if(style == 1) {
@@ -32,7 +29,6 @@ public class MazeSolver {
 	}else if(style == 3) {
 	    frontman = new FrontierPriorityQueue();
 	    maze.getStart().setAStar(true);
-	    maze.getEnd().setAStar(true);
 	}else {
 	    System.out.println("uhhh?");
 	}
@@ -95,4 +91,9 @@ public class MazeSolver {
 	return list;
     }
 
+    public static void main(String[] args) {
+	MazeSolver a = new MazeSolver("data1.dat", true);
+	a.solve(0);
+	System.out.println(a.toString());
+    }
 }
