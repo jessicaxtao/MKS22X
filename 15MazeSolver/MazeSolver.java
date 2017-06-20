@@ -90,10 +90,11 @@ public class MazeSolver {
 	}
 	return list;
     }
-
+    /*
     public static void main(String[] args) {
 	MazeSolver a = new MazeSolver("data1.dat", true);
 	a.solve(0);
 	System.out.println(a.toString());
     }
+    */
 }
